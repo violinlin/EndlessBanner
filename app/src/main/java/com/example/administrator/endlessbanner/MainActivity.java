@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         Banner banner = (Banner) findViewById(R.id.banner);
-        banner.setData(R.mipmap.ic_launcher,R.mipmap.ic_launcher, R.mipmap.ic_launcher,
-                R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher);
+        banner.setData(R.drawable.shaoshao, R.drawable.shaoyu, R.drawable.tianming,
+                R.drawable.shilan, R.drawable.dashu, R.drawable.ronger);
     }
 }
