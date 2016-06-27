@@ -17,5 +17,6 @@ public class MainActivity extends AppCompatActivity {
         Banner banner = (Banner) findViewById(R.id.banner);
         banner.setData(R.drawable.shaoshao, R.drawable.shaoyu, R.drawable.tianming,
                 R.drawable.shilan, R.drawable.dashu, R.drawable.ronger);
+        banner.bannerPlay(2000);
     }
 }

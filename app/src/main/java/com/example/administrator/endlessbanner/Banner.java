@@ -100,7 +100,6 @@ public class Banner extends RelativeLayout {
         }
         bannerAdapter.notifyDataSetChanged();
 
-        bannerPlay();
 
     }
 
@@ -147,10 +146,13 @@ public class Banner extends RelativeLayout {
     int pagerPosition;
     Handler handler;
 
+
+
     /**
      * 通过嵌套发送消息循环滚动viewpager
+     * @param delayMillis 轮播图片的时间
      */
-    public void bannerPlay() {
+    public void bannerPlay(final long delayMillis) {
 //        设置显示的初始位置，模拟向左无限滑动（设置合适的值就行，一般人也不会滑动很多）
         pagerPosition = views.size() * 100;
         if (handler == null) {
@@ -165,11 +167,11 @@ public class Banner extends RelativeLayout {
                         }
                     });
                     Message message = handler.obtainMessage(0);
-                    handler.sendMessageDelayed(message, 2000);
+                    handler.sendMessageDelayed(message, delayMillis);
                 }
             };
             Message message = handler.obtainMessage(0);
-            handler.sendMessageDelayed(message, 2000);
+            handler.sendMessageDelayed(message, delayMillis);
         }
     }
 }
