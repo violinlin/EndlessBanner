@@ -73,8 +73,9 @@ public class Banner extends RelativeLayout {
      *
      * @param data
      */
-    public void setData(int... data) {
-        boolean isFirst = true;
+
+
+    public void setData(Object... data) {
         int id[] = new int[data.length];
         for (int i = 0; i < id.length; i++) {
             id[i] = i;
@@ -82,17 +83,19 @@ public class Banner extends RelativeLayout {
         for (int i = 0; i < data.length; i++) {
             View view = LayoutInflater.from(getContext()).inflate(R.layout.banner_item_layout, viewPager, false);
             ImageView imageView = (ImageView) view.findViewById(R.id.iv_banner_item);
-            imageView.setImageResource(data[i]);
+            if (data[i] instanceof Integer) {
+
+                imageView.setImageResource((Integer) data[i]);
+            } else {
+//                TODO 如果设置的数据源为图片地址或者其他类型，根据具体情况为imageView设置图片源
+            }
             views.add(view);
             //指示器小圆点的设置
             View indicator = LayoutInflater.from(getContext()).inflate(R.layout.indicator_item_layout, viewPager, false);
             radioButton = (RadioButton) indicator.findViewById(R.id.radioButton);
-//            为radioButton设置一个id,不设置的话第一个radiobutton总是没法设置成选中中状态（不太清楚好像是个bug）
-            radioButton.setId(id[i]);
-            //将第一个指示器设置为选中
-            if (isFirst) {
-                radioButton.setChecked(true);
-                isFirst = false;
+            radioButton.setId(id[i]);// 为radioButton设置一个id,不设置的话第一个radiobutton总是没法设置成选中中状态（不太清楚好像是个bug）
+            if (i == 0) {
+                radioButton.setChecked(true); //将第一个指示器设置为选中
             }
             RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(dip2px(getContext(), 10f), dip2px(getContext(), 10f));
             layoutParams.leftMargin = dip2px(getContext(), 20);
@@ -147,9 +150,9 @@ public class Banner extends RelativeLayout {
     Handler handler;
 
 
-
     /**
      * 通过嵌套发送消息循环滚动viewpager
+     *
      * @param delayMillis 轮播图片的时间
      */
     public void bannerPlay(final long delayMillis) {
